@@ -1,0 +1,37 @@
+{
+  "name": "static-props",
+  "description": "defines static object attributes using Object.defineProperties",
+  "version": "0.0.0",
+  "homepage": "http://npm.im/static-props",
+  "author": {
+    "name": "Gianluca Casati",
+    "url": "http://g14n.info"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "check-deps": "npm outdated",
+    "lint": "standard",
+    "postversion": "git push origin v${npm_package_version}; npm publish; git push origin master",
+    "test": "tape test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fibo/static-props.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/fibo/static-props/issues"
+  },
+  "pre-commit": [
+    "lint",
+    "test",
+    "check-deps"
+  ],
+  "devDependencies": {
+    "pre-commit": "^1.1.2",
+    "standard": "^6.0.7",
+    "tape": "^4.5.0"
+  },
+  "dependencies": {}
+}
