@@ -7,12 +7,14 @@ function staticProps (obj) {
 
       statik[propName] = {
         value: propValue,
+        configurable: false,
+        enumerable: false,
         writable: false
       }
     }
 
-    console.log(statik)
     Object.defineProperties(obj, statik)
   }
 }
+
 module.exports = staticProps

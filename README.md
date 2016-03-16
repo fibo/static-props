@@ -2,8 +2,6 @@
 
 > defines static object attributes using Object.defineProperties
 
-[![KLP](https://img.shields.io/badge/kiss-literate-orange.svg)](http://g14n.info/kiss-literate-programming)
-
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
 ## Usage
@@ -39,10 +37,16 @@ p.label = 'B'
 // TypeError: Cannot assign to read only property 'label' of #<Point2d>
 ```
 
-If you want to add a static attribute, you can also do
+If you want to add a static attribute class, you can also do
 
 ```
 staticProps(Point2d)({ dim: 2 })
+```
+
+so you can access it with
+
+```
+console.log(Point2d.dim) // 2
 ```
 
 ## License
