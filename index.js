@@ -11,6 +11,7 @@ function staticProps (obj) {
       }
     }
 
+    console.log(statik)
     Object.defineProperties(obj, statik)
   }
 }

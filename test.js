@@ -14,8 +14,10 @@ class Point2d {
   }
 }
 
+staticProps(Point2d)({ dim: 2 })
+
 test('staticProps', (t) => {
-  t.plan(3)
+  t.plan(4)
 
   var p = new Point2d(1, 2, 'A')
 
@@ -23,4 +25,6 @@ test('staticProps', (t) => {
   t.equal(p.color, 'red', 'assigns prop')
 
   t.throws(() => { p.label = 'B' }, /TypeError: Cannot assign to read only property 'label' of #<Point2d>/, 'static prop cannot be modified')
+
+  t.equal(Point2d.dim, 2, 'assigns static attribute')
 })

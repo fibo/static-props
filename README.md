@@ -39,6 +39,12 @@ p.label = 'B'
 // TypeError: Cannot assign to read only property 'label' of #<Point2d>
 ```
 
+If you want to add a static attribute, you can also do
+
+```
+staticProps(Point2d)({ dim: 2 })
+```
+
 ## License
 
 [MIT](http://g14n.info/mit-license)
