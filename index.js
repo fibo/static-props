@@ -1,5 +1,5 @@
 function staticProps (obj) {
-  return function (props) {
+  return function (props, enumerable) {
     var statik = {}
 
     for (var propName in props) {
@@ -8,7 +8,7 @@ function staticProps (obj) {
       statik[propName] = {
         value: propValue,
         configurable: false,
-        enumerable: false,
+        enumerable: enumerable,
         writable: false
       }
     }
