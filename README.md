@@ -1,6 +1,6 @@
 # static-props
 
-> defines static object attributes using `Object.defineProperties`
+> defines static object attributes using Object.defineProperties
 
 [![KLP](https://img.shields.io/badge/kiss-literate-orange.svg)](http://g14n.info/kiss-literate-programming)
 
