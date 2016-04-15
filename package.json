@@ -1,6 +1,6 @@
 {
   "name": "static-props",
-  "description": "defines static object attributes using Object.defineProperties",
+  "description": "defines static object attributes using `Object.defineProperties`",
   "version": "0.3.0",
   "homepage": "http://npm.im/static-props",
   "author": {
