@@ -15,19 +15,21 @@
     "postversion": "git push origin v${npm_package_version}; npm publish; git push origin master",
     "test": "tape test.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/fibo/static-props.git"
-  },
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/fibo/static-props/issues"
-  },
   "pre-commit": [
     "lint",
     "test",
     "check-deps"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fibo/static-props.git"
+  },
+  "keywords": [
+    "static"
+  ],
+  "bugs": {
+    "url": "https://github.com/fibo/static-props/issues"
+  },
   "devDependencies": {
     "pre-commit": "^1.1.2",
     "standard": "^6.0.7",

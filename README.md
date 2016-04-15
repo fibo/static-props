@@ -1,8 +1,24 @@
 # static-props
 
-> defines static object attributes using Object.defineProperties
+> defines static object attributes using `Object.defineProperties`
+
+[![KLP](https://img.shields.io/badge/kiss-literate-orange.svg)](http://g14n.info/kiss-literate-programming)
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
+**Table Of Contents:**
+
+* [Installation](#installation)
+* [Usage](#usage)
+* [License](#license)
+
+## Installation
+
+With [npm](https://npmjs.org/) do
+
+```bash
+npm install static-props --save
+```
 
 ## Usage
 
@@ -55,6 +71,43 @@ so you can access it with
 ```javascript
 console.log(Point2d.dim) // 2
 ```
+
+## Annotated source
+
+* **@param** `{Object}` obj
+* **@returns** `{Function}`
+
+	function staticProps (obj) {
+
+* **@param** `{Object}` props
+* **@param** `{Boolean}` [enumerable]
+
+	  return function (props, enumerable) {
+
+Since `static` is a reserved keywork, let's use `statik`
+
+	    var statik = {}
+
+Add every *prop* to *obj* as not writable nor configurable, i.e. **static**
+
+	    for (var propName in props) {
+	      var propValue = props[propName]
+	
+	      statik[propName] = {
+	        value: propValue,
+	        configurable: false,
+	        enumerable: enumerable,
+	        writable: false
+	      }
+	    }
+	
+	    Object.defineProperties(obj, statik)
+	  }
+	}
+
+Export function
+
+	module.exports = staticProps
 
 ## License
 

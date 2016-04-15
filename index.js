@@ -16,5 +16,4 @@ function staticProps (obj) {
     Object.defineProperties(obj, statik)
   }
 }
-
 module.exports = staticProps
