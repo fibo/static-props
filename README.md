@@ -10,6 +10,7 @@
 
 * [Installation](#installation)
 * [Usage](#usage)
+* [Annotated source](#annotated-source)
 * [License](#license)
 
 ## Installation
@@ -74,13 +75,18 @@ console.log(Point2d.dim) // 2
 
 ## Annotated source
 
-* **@param** `{Object}` obj
-* **@returns** `{Function}`
+API is `staticProps(obj)(props[, enumerable])`
 
+	/**
+	 * @param {Object} obj
+	 * @returns {Function}
+	 */
+	
 	function staticProps (obj) {
-
-* **@param** `{Object}` props
-* **@param** `{Boolean}` [enumerable]
+	  /**
+	   * @param {Object} props
+	   * @param {Boolean} [enumerable]
+	   */
 
 	  return function (props, enumerable) {
 
