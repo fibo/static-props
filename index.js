@@ -9,19 +9,25 @@ function staticProps (obj) {
    * @param {Boolean} [enumerable]
    */
   return function (props, enumerable) {
-    var statik = {}
+    var staticProps = {}
+
     for (var propName in props) {
-      var propValue = props[propName]
-
-      statik[propName] = {
-        value: propValue,
+      var staticProp = {
         configurable: false,
-        enumerable: enumerable,
-        writable: false
+        enumerable: enumerable
       }
-    }
+      var prop = props[propName]
 
-    Object.defineProperties(obj, statik)
+      if (typeof prop === 'function') staticProp.get = prop
+      else {
+        staticProp.value = prop
+
+        staticProp.writable = false
+      }
+
+      staticProps[propName] = staticProp
+    }
+    Object.defineProperties(obj, staticProps)
   }
 }
 module.exports = staticProps

@@ -35,8 +35,11 @@ class Point2d {
     // Suppose you have few static attributes in your class.
     const color = 'red'
 
+    // Create a getter.
+    const norm = () => x * x + y * y
+
     // Add constant attributes quickly.
-    staticProps(this)({label, color})
+    staticProps(this)({label, color, norm})
 
     // Add enumerable attributes.
     var enumerable = true
@@ -53,6 +56,14 @@ var p = new Point2d(1, 2)
 // Trying to modify a static prop will throw as you expect.
 p.label = 'B'
 // TypeError: Cannot assign to read only property 'label' of #<Point2d>
+```
+
+Props *label* and *color* are values, while *norm* is a getter.
+
+```javascript
+console.log(p.label) // 'A'
+console.log(p.color) // 'red'
+console.log(p.norm) // 5 = 1 * 1 + 2 * 2
 ```
 
 Attributes `x`, `y` were configured to be enumerable
@@ -90,24 +101,33 @@ API is `staticProps(obj)(props[, enumerable])`
 
 	  return function (props, enumerable) {
 
-Since `static` is a reserved keywork, let's use `statik`
-
-	    var statik = {}
-
 Add every *prop* to *obj* as not writable nor configurable, i.e. **static**
 
+	    var staticProps = {}
+	
 	    for (var propName in props) {
-	      var propValue = props[propName]
-	
-	      statik[propName] = {
-	        value: propValue,
+	      var staticProp = {
 	        configurable: false,
-	        enumerable: enumerable,
-	        writable: false
+	        enumerable: enumerable
 	      }
-	    }
+
+If prop is a function use it as a *getter*, otherwise as a *value*
+
+	      var prop = props[propName]
 	
-	    Object.defineProperties(obj, statik)
+	      if (typeof prop === 'function') staticProp.get = prop
+	      else {
+	        staticProp.value = prop
+	
+	        staticProp.writable = false
+	      }
+	
+	      staticProps[propName] = staticProp
+	    }
+
+Finally, apply the [Object.defineProperties](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) function
+
+	    Object.defineProperties(obj, staticProps)
 	  }
 	}
 
