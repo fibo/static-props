@@ -30,7 +30,7 @@ Let's create a classic Point2d class and add constant attributes.
 ```javascript
 'use strict'
 
-var staticProps = require('static-props')
+const staticProps = require('static-props')
 
 class Point2d {
   constructor (x, y, label) {
@@ -44,16 +44,24 @@ class Point2d {
     staticProps(this)({label, color, norm})
 
     // Add enumerable attributes.
-    var enumerable = true
+    const enumerable = true
     staticProps(this)({x, y}, enumerable)
   }
 }
+
+// Add a static class attribute.
+staticProps(Point2d)({ dim: 2 })
+
+const norm = (x, y) => x * x + y * y
+// A particular case are static method, since they are functions
+// they must be wrapped otherwise are considerer as getters.
+staticProps(Point2d)({ norm: () => norm })
 ```
 
 After instantiating the class, we can check that its props cannot be changed.
 
 ```javascript
-var p = new Point2d(1, 2)
+const p = new Point2d(1, 2)
 
 // Trying to modify a static prop will throw as you expect.
 p.label = 'B'
@@ -74,27 +82,25 @@ Attributes `x`, `y` were configured to be enumerable
 console.log(p) // Point2d { x: 1, y: 2 }
 ```
 
-If you want to add a static attribute class, you can also do
-
-```javascript
-staticProps(Point2d)({ dim: 2 })
-```
-
-so you can access it with
+You can access a static class attributes and methods
 
 ```javascript
 console.log(Point2d.dim) // 2
+console.log(Point2d.norm(1, 2)) // 5
 ```
 
 ## Annotated source
 
-API is `staticProps(obj)(props[, enumerable])`
+API is `staticProps(obj)(props[, enumerable])`.
+
+Add every *prop* to *obj* as not writable nor configurable, i.e. **static**.
+If prop is a function use it as a *getter*, otherwise as a *value*
+Finally, apply the [Object.defineProperties](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) function.
 
 	/**
 	 * @param {Object} obj
 	 * @returns {Function}
 	 */
-	
 	function staticProps (obj) {
 	  /**
 	   * @param {Object} props
@@ -103,37 +109,30 @@ API is `staticProps(obj)(props[, enumerable])`
 
 	  return function (props, enumerable) {
 
-Add every *prop* to *obj* as not writable nor configurable, i.e. **static**
-
 	    var staticProps = {}
-	
+
 	    for (var propName in props) {
 	      var staticProp = {
 	        configurable: false,
 	        enumerable: enumerable
 	      }
 
-If prop is a function use it as a *getter*, otherwise as a *value*
-
 	      var prop = props[propName]
-	
-	      if (typeof prop === 'function') staticProp.get = prop
-	      else {
+
+	      if (typeof prop === 'function') {
+	        staticProp.get = prop
+	      } else {
 	        staticProp.value = prop
-	
+
 	        staticProp.writable = false
 	      }
-	
+
 	      staticProps[propName] = staticProp
 	    }
-
-Finally, apply the [Object.defineProperties](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) function
 
 	    Object.defineProperties(obj, staticProps)
 	  }
 	}
-
-Export function
 
 	module.exports = staticProps
 

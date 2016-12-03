@@ -11,17 +11,20 @@ class Point2d {
 
     staticProps(this)({label, color, norm})
 
-    var enumerable = true
+    const enumerable = true
     staticProps(this)({x, y}, enumerable)
   }
 }
 
 staticProps(Point2d)({ dim: 2 })
 
-test('staticProps', (t) => {
-  t.plan(9)
+const norm = (x, y) => x * x + y * y
+staticProps(Point2d)({ norm: () => norm })
 
-  var p = new Point2d(1, 2, 'A')
+test('staticProps', (t) => {
+  t.plan(10)
+
+  const p = new Point2d(1, 2, 'A')
 
   t.equal(p.x, 1, 'assigns prop "x"')
   t.equal(p.y, 2, 'assigns prop "y"')
@@ -34,4 +37,5 @@ test('staticProps', (t) => {
   t.ok(p.propertyIsEnumerable('x'), 'prop "x" is enumerable')
   t.ok(p.propertyIsEnumerable('y'), 'prop "y" is enumerable')
   t.equal(Point2d.dim, 2, 'assigns static attribute')
+  t.equal(Point2d.norm(1, 2), 5, 'assigns static method')
 })
