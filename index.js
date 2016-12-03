@@ -1,29 +1,29 @@
-	/**
-	 * @param {Objec} obj
-	 * @reurns {Function}
-	 */
-	funcion staticProps (obj) {
-	  /**
-	   * @param {Objec} props
-	   * @param {Boolean} [enumerable]
-	   */
-	  reurn function (props, enumerable) {
-	    var saticProps = {}
-	    for (var propName in props) {
-	      var saticProp = {
-	        configurable: false,
-	        enumerable: enumerable
-	      }
-	      var prop = props[propName]
-	      if (ypeof prop === 'function') {
-	        saticProp.get = prop
-	      } else {
-	        saticProp.value = prop
-	        saticProp.writable = false
-	      }
-	      saticProps[propName] = staticProp
-	    }
-	    Objec.defineProperties(obj, staticProps)
-	  }
-	}
-	module.expors = staticProps
+/**
+ * @param {Object} obj
+ * @returns {Function}
+ */
+function staticProps (obj) {
+  /**
+   * @param {Object} props
+   * @param {Boolean} [enumerable]
+   */
+  return function (props, enumerable) {
+    var staticProps = {}
+    for (var propName in props) {
+      var staticProp = {
+        configurable: false,
+        enumerable: enumerable
+      }
+      var prop = props[propName]
+      if (typeof prop === 'function') {
+        staticProp.get = prop
+      } else {
+        staticProp.value = prop
+        staticProp.writable = false
+      }
+      staticProps[propName] = staticProp
+    }
+    Object.defineProperties(obj, staticProps)
+  }
+}
+module.exports = staticProps

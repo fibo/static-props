@@ -1,7 +1,7 @@
 'use strict'
 
-var test = require('tape')
-var staticProps = require('./index')
+const test = require('tape')
+const staticProps = require('./index')
 
 class Point2d {
   constructor (x, y, label) {
@@ -32,7 +32,7 @@ test('staticProps', (t) => {
   t.equal(p.color, 'red', 'assigns prop "color"')
   t.equal(p.norm, 5, 'assigns prop "norm" with a getter')
 
-  t.throws(() => { p.label = 'B' }, /TypeError: Cannot assign to read only property 'label' of #<Point2d>/, 'static prop cannot be modified')
+  t.throws(() => { p.label = 'B' }, /TypeError: Cannot assign to read only property/, 'static prop cannot be modified')
 
   t.ok(p.propertyIsEnumerable('x'), 'prop "x" is enumerable')
   t.ok(p.propertyIsEnumerable('y'), 'prop "y" is enumerable')
