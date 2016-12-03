@@ -8,12 +8,10 @@
 
 [![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
 
-**Table Of Contents:**
-
-* [Installation](#installation)
-* [Usage](#usage)
-* [Annotated source](#annotated-source)
-* [License](#license)
+[Installation](#installation) |
+[Usage](#usage) |
+[Annotated source](#annotated-source) |
+[License](#license)
 
 ## Installation
 
