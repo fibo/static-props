@@ -51,7 +51,7 @@ class Point2d {
 staticProps(Point2d)({ dim: 2 })
 
 const norm = (x, y) => x * x + y * y
-// A particular case are static method, since they are functions
+// A particular case are static methods, since they are functions
 // they must be wrapped otherwise are considerer as getters.
 staticProps(Point2d)({ norm: () => norm })
 ```
