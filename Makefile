@@ -1,3 +1,3 @@
-.PHONY: index.js
-index.js:
-	grep -P '\t' README.md | sed -e 's/\t//' > index.js
+.PHONY: static-props.js
+static-props.js:
+	grep -P '\t' README.md | sed -e 's/\t//' > static-props.js
