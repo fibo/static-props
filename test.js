@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('tape')
-const staticProps = require('./index')
+const staticProps = require('static-props')
 
 class Point2d {
   constructor (x, y, label) {

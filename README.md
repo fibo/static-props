@@ -29,6 +29,7 @@ Let's create a classic Point2d class and add constant attributes.
 'use strict'
 
 const staticProps = require('static-props')
+// Or use ES6: import staticProps from 'static-props'
 
 class Point2d {
   constructor (x, y, label) {
@@ -132,7 +133,7 @@ Finally, apply the [Object.defineProperties](https://developer.mozilla.org/it/do
 	  }
 	}
 
-	module.exports = staticProps
+	module.exports = exports.default = staticProps
 
 ## License
 
