@@ -2,16 +2,16 @@
 
 > defines static object attributes using Object.defineProperties
 
-[![KLP](https://img.shields.io/badge/kiss-literate-orange.svg)](http://g14n.info/kiss-literate-programming)
-
-[![NPM version](https://badge.fury.io/js/static-props.svg)](http://badge.fury.io/js/static-props) [![Build Status](https://travis-ci.org/fibo/static-props.svg?branch=master)](https://travis-ci.org/fibo/static-props?branch=master) [![Dependency Status](https://gemnasium.com/fibo/static-props.svg)](https://gemnasium.com/fibo/static-props)
-
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-
 [Installation](#installation) |
 [Usage](#usage) |
 [Annotated source](#annotated-source) |
 [License](#license)
+
+[![NPM version](https://badge.fury.io/js/static-props.svg)](http://badge.fury.io/js/static-props)
+[![Build Status](https://travis-ci.org/fibo/static-props.svg?branch=master)](https://travis-ci.org/fibo/static-props?branch=master)
+[![Dependency Status](https://gemnasium.com/fibo/static-props.svg)](https://gemnasium.com/fibo/static-props)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![KLP](https://img.shields.io/badge/kiss-literate-orange.svg)](http://g14n.info/kiss-literate-programming)
 
 ## Installation
 
