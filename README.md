@@ -53,7 +53,7 @@ staticProps(Point2d)({ dim: 2 })
 
 const norm = (x, y) => x * x + y * y
 // A particular case are static methods, since they are functions
-// they must be wrapped otherwise are considerer as getters.
+// they must be wrapped otherwise are considered as getters.
 staticProps(Point2d)({ norm: () => norm })
 ```
 
@@ -62,7 +62,7 @@ After instantiating the class, we can check that its props cannot be changed.
 ```javascript
 const p = new Point2d(1, 2)
 
-// Trying to modify a static prop will throw as you expect.
+// Trying to modify a static prop will throw, as expected.
 p.label = 'B'
 // TypeError: Cannot assign to read only property 'label' of #<Point2d>
 ```
@@ -75,13 +75,13 @@ console.log(p.color) // 'red'
 console.log(p.norm) // 5 = 1 * 1 + 2 * 2
 ```
 
-Attributes `x`, `y` were configured to be enumerable
+Attributes `x`, `y` were configured to be *enumerable*.
 
 ```javascript
 console.log(p) // Point2d { x: 1, y: 2 }
 ```
 
-You can access a static class attributes and methods
+You can access static class attributes and methods.
 
 ```javascript
 console.log(Point2d.dim) // 2
