@@ -9,7 +9,7 @@
 
 [![NPM version](https://badge.fury.io/js/static-props.svg)](http://badge.fury.io/js/static-props)
 [![Build Status](https://travis-ci.org/fibo/static-props.svg?branch=master)](https://travis-ci.org/fibo/static-props?branch=master)
-[![Dependency Status](https://gemnasium.com/fibo/static-props.svg)](https://gemnasium.com/fibo/static-props)
+[![No deps](https://img.shields.io/badge/dependencies-none-green.svg)](https://github.com/fibo/strict-mode)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![KLP](https://img.shields.io/badge/kiss-literate-orange.svg)](http://g14n.info/kiss-literate-programming)
 
@@ -25,7 +25,7 @@ npm install static-props --save
 
 Let's create a classic Point2d class and add constant attributes.
 
-```javascript
+```js
 'use strict'
 
 const staticProps = require('static-props')
@@ -59,7 +59,7 @@ staticProps(Point2d)({ norm: () => norm })
 
 After instantiating the class, we can check that its props cannot be changed.
 
-```javascript
+```js
 const p = new Point2d(1, 2)
 
 // Trying to modify a static prop will throw, as expected.
@@ -69,7 +69,7 @@ p.label = 'B'
 
 Props *label* and *color* are values, while *norm* is a getter.
 
-```javascript
+```js
 console.log(p.label) // 'A'
 console.log(p.color) // 'red'
 console.log(p.norm) // 5 = 1 * 1 + 2 * 2
@@ -77,13 +77,13 @@ console.log(p.norm) // 5 = 1 * 1 + 2 * 2
 
 Attributes `x`, `y` were configured to be *enumerable*.
 
-```javascript
+```js
 console.log(p) // Point2d { x: 1, y: 2 }
 ```
 
 You can access static class attributes and methods.
 
-```javascript
+```js
 console.log(Point2d.dim) // 2
 console.log(Point2d.norm(1, 2)) // 5
 ```
@@ -93,47 +93,51 @@ console.log(Point2d.norm(1, 2)) // 5
 API is `staticProps(obj)(props[, enumerable])`.
 
 Add every *prop* to *obj* as not writable nor configurable, i.e. **static**.
-If prop is a function use it as a *getter*, otherwise as a *value*
+If prop is a function use it as a *getter*, otherwise use it as a *value*.
 Finally, apply the [Object.defineProperties](https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties) function.
 
-	/**
-	 * @param {Object} obj
-	 * @returns {Function}
-	 */
-	function staticProps (obj) {
-	  /**
-	   * @param {Object} props
-	   * @param {Boolean} [enumerable]
-	   */
+```javascript
+/**
+ * @param {Object} obj
+ * @returns {Function}
+ */
+function staticProps (obj) {
+  /**
+   * @param {Object} props
+   * @param {Boolean} [enumerable]
+   */
+  return function (props, enumerable) {
+    var staticProps = {}
 
-	  return function (props, enumerable) {
+    for (var propName in props) {
+      var staticProp = {
+        configurable: false,
+        enumerable: enumerable
+      }
 
-	    var staticProps = {}
+      var prop = props[propName]
 
-	    for (var propName in props) {
-	      var staticProp = {
-	        configurable: false,
-	        enumerable: enumerable
-	      }
+      if (typeof prop === 'function') {
+        staticProp.get = prop
+      } else {
+        staticProp.value = prop
 
-	      var prop = props[propName]
+        staticProp.writable = false
+      }
 
-	      if (typeof prop === 'function') {
-	        staticProp.get = prop
-	      } else {
-	        staticProp.value = prop
+      staticProps[propName] = staticProp
+    }
 
-	        staticProp.writable = false
-	      }
+    Object.defineProperties(obj, staticProps)
+  }
+}
+```
 
-	      staticProps[propName] = staticProp
-	    }
+Export function, supporting both CommonJS and ES6.
 
-	    Object.defineProperties(obj, staticProps)
-	  }
-	}
-
-	module.exports = exports.default = staticProps
+```javascript
+module.exports = exports.default = staticProps
+```
 
 ## License
 

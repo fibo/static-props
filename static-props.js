@@ -9,20 +9,26 @@ function staticProps (obj) {
    */
   return function (props, enumerable) {
     var staticProps = {}
+
     for (var propName in props) {
       var staticProp = {
         configurable: false,
         enumerable: enumerable
       }
+
       var prop = props[propName]
+
       if (typeof prop === 'function') {
         staticProp.get = prop
       } else {
         staticProp.value = prop
+
         staticProp.writable = false
       }
+
       staticProps[propName] = staticProp
     }
+
     Object.defineProperties(obj, staticProps)
   }
 }

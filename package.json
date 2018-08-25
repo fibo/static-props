@@ -12,6 +12,7 @@
   "scripts": {
     "check-deps": "npm outdated",
     "lint": "standa",
+    "markdown2code": "markdown2code -l javascript README.md > ${npm_package_main}",
     "postversion": "git push origin v${npm_package_version}; npm publish; git push origin master",
     "test": "NODE_PATH=. tape test.js"
   },
@@ -31,9 +32,10 @@
     "url": "https://github.com/fibo/static-props/issues"
   },
   "devDependencies": {
+    "markdown2code": "^1.0.1",
     "pre-commit": "^1.2.2",
-    "standa": "^1.0.2",
-    "tape": "^4.6.3"
+    "standa": "^2.1.0",
+    "tape": "^4.9.1"
   },
   "dependencies": {}
 }
