@@ -1,6 +1,6 @@
 # static-props
 
-> defines static object attributes using Object.defineProperties
+> defines static object attributes using `Object.defineProperties`
 
 [Installation](#installation) |
 [Usage](#usage) |
